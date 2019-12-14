@@ -1,0 +1,15 @@
+{
+  "name": "code-editor-experiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^7.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Lucasion",
+  "license": "ISC"
+}
