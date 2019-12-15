@@ -36,9 +36,23 @@ function highlight(text) {
     if (state.length == 0) {return;}
     delete state[state.length-1];
   }
-
+  
   var newText = "";
   var word = "";
+
+  /**
+   * @param {string} text
+   * @param {RegExp} regExp
+   * @param {string} classes
+   */
+  function createSpan(regExp, classes, title = false) {
+    var titleText = "";
+    if (title != false && typeof title == "string") {
+      titleText = `title="${title}"`;
+    }
+    newText = newText.replace(regExp, `<span class="${classes.toUpperCase()}"${titleText}>$&</span>`);
+    return newText;
+  }
   // Parsing the text from start to finish
   for (let i = 0; i < text.length; i++) {
     var s = text[i];
@@ -49,9 +63,14 @@ function highlight(text) {
     }
 
     // Check start indicators
-    if (s == "\"" && topState() != "\"") {
+    if (s == "\"" && topState() != "\"" && topState() != "'") {
       state.push("\"");
-      newText += `<span class="skeyword">`;
+      newText += `<span class="VALUE">`;
+      skip();
+    }
+    else if (s == "'" && topState() != "\"" && topState() != "'") {
+      state.push("'");
+      newText += `<span class="VALUE">`;
       skip();
     }
     else {
@@ -70,15 +89,42 @@ function highlight(text) {
       delTopState();
       newText += `</span>`;
     }
-
-    console.log(state);
+    else if (s == "'" && topState() == "\'" && text[i-1] != "\\") {
+      delTopState();
+      newText += `</span>`;
+    }
     
   }
+  // Special word highlighting.
+  // BASE
+  createSpan(/(?<!\w)this(?!\w)/g, "base");
+  
+  // CLASS
+  createSpan(/(?<!\w)console(?!\w)/g, "class");
+  createSpan(/(?<!\w)Promise(?!\w)/g, "class");
+  createSpan(/(?<!\w)JSON(?!\w)/g, "class");
+  
+  // FUNCTION
+  createSpan(/\w+(?=\s*\([\w\W\n]*\))/g, "function");
+  
+  // VAR
+  createSpan(/(?<=\.)\w+/g, "var");
+  createSpan(/(?<=(?<!\w)var\s+)\w+/g, "var");
+  createSpan(/(?<=\()[\w\W\n]+(?=\))/g, "var");
+  
+  // SKEYWORD
+  createSpan(/(?<!\w)function(?!\w)/g, "skeyword");
+  createSpan(/(?<!\w)return(?!\w)/g, "skeyword");
+
+  // KEYWORD
+  createSpan(/(?<!\w)var(?!\w)/g, "keyword");
+
+  // VALUE
+  createSpan(/\d/g, "value");
 
 
-  if (text == "function") {
-    text = `<span class="skeyword">${text}</span>`;
-  }
+  // console.log(newText);
+  
   return newText;
 }
 
@@ -90,4 +136,10 @@ async function wait(seconds = 1) {
   setTimeout(() => {
     return;
   }, seconds * 1000);
+}
+
+this.variable = function gay() {
+  var json = JSON.parse('{"variable": "gay"}');
+  console.log(json);
+  return 1024;
 }
