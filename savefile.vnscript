@@ -1,6 +1,15 @@
-char mei "Mei's full name" "Sprite/Chars/Mei/" "Audio/Chars/Mei"
-char baka "Baka desu" "Sprite/Chars/Baka/" "Audio/Chars/Baka"
+c["kjeks"] kjks Sprites/kjeks
+c["Lucasion"] lcs Sprites/lucasion
+c[Mei Yachiyo] mei Sprites/Characters/Mei/
+c[Cool other person] thisAnotherCharacter res/another_person/
 
-dialog 0 mei "This string is what I am going to say!" "dialog0"
-// Dialogs should automatically add an extension if none is specified [Probably wav or mp3]
-// And maybe dialog ID does not need to be specified, instead be set automatically according to the order it was written in.
+// If text strings does not use "quotes" it will display in a blue color. Maybe it should be optional?
+
+d0["String to say"] (kjks, lcs) "soundFile.mp3"
+
+d1["You know, I could keep giving serious examples, but that's not fun, right?"] (mei thisAnotherCharacter) "Sound/Dialogs/soundd3.wav"
+| Move mei 100 360 500
+
+d2["idk what else to make as example /shrug"] (lcs)
+| PlayMusic cool/path/soundTrackPath.mp3
+| Zoom kjks 1.5 2000
