@@ -67,7 +67,6 @@ body{
   font-style: italic;
 }
 
-
 .VALUE span{
   color: #ff9a28;
 }
@@ -75,4 +74,13 @@ body{
 .COMMENT span{
   color: #006408;
   font-style: italic;
+}
+
+span:hover{
+  text-decoration: underline;
+  text-decoration-color: green;
+}
+
+#displayEditor[ctrl]{
+  pointer-events: all;
 }

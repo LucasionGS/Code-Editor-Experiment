@@ -14,6 +14,7 @@ window.onload = function() {
   displayEditor = document.getElementById("displayEditor");
 
   var ac = new AutoComplete(activeEditor, [
+    "c[]",
     "| MoveRel",
     "| Move",
     "| Zoom",
@@ -124,6 +125,19 @@ window.onload = function() {
       this.value = codeText.substring(0, activeEditor.selectionStart-2) + codeText.substring(activeEditor.selectionStart);
       this.setSelectionRange(nss, nss);
       displayEditor.innerHTML = highlight(this.value);
+    }
+    else if (e.key = "Control" && !e.shiftKey && !e.altKey) {
+      displayEditor.toggleAttribute("ctrl", true);
+      e.preventDefault();
+    }
+  }
+
+  /**
+   * @type {(this: HTMLTextAreaElement, e: KeyboardEvent)}
+   */
+  window.onkeyup = function(e) {
+    if (e.key == "Control") {
+      displayEditor.toggleAttribute("ctrl", false);
     }
   }
 }
@@ -249,10 +263,10 @@ function highlight(text, lang = "vns") {
     createSpan(/\/\/.*/gm, "comment");
     
     // Character Definitions
-    createSpan(/(?<=\[).*?(?=\])/g, "var"); // [String]
-    createSpan(/(?<=c\[.*?\]\s+[^\s\n"']+\s+)[^\s\n"']+/g, "var"); // Resource root
-    createSpan(/(?<=c\[.*?\]\s+)[^\s\n"]+/g, "var"); // script_name
-    createSpan(/c(?=\[.*?\])/g, "function"); // c[]
+    createSpan(/(?<=\[).*?(?=\])/g, "var", "String"); // [String]
+    createSpan(/(?<=c\[.*?\]\s+[^\s\n"']+\s+)[^\s\n"']+/g, "var", "Root Source Path"); // Resource root
+    createSpan(/(?<=c\[.*?\]\s+)[^\s\n"]+/g, "var", "Character Variable Name"); // script_name
+    createSpan(/c(?=\[.*?\])/g, "function", "Character Definition"); // c[]
     
     // Dialog Definitions
     createSpan(/d(?=\d+)/g, "value"); // dxx[]

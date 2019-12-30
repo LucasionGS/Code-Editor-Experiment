@@ -5,11 +5,16 @@ c[Cool other person] thisAnotherCharacter res/another_person/
 
 // If text strings does not use "quotes" it will display in a blue color. Maybe it should be optional?
 
-d0["String to say"] (kjks, lcs) "soundFile.mp3"
+d0["String to say"] (kjks lcs) "soundFile.mp3"
 
 d1["You know, I could keep giving serious examples, but that's not fun, right?"] (mei thisAnotherCharacter) "Sound/Dialogs/soundd3.wav"
-| Move mei 100 360 500
+  | Move mei 100 360 500
+
 
 d2["idk what else to make as example /shrug"] (lcs)
-| PlayMusic cool/path/soundTrackPath.mp3
-| Zoom kjks 1.5 2000
+  | PlayMusic cool/path/soundTrackPath.mp3
+  | Zoom kjks 1.5 2000
+  | MoveRel lcs 200 0
+
+d3[This should be writeable both with and without quotation marks.] (lcs kjks mei thisAnotherCharacter)
+  | MoveRel lcs -200 0
