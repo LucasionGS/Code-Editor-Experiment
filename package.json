@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "electron": "^7.1.4"
+    "electron": "^7.1.4",
+    "xterm": "^4.3.0"
   },
   "devDependencies": {},
   "scripts": {
