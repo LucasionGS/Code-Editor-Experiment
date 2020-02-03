@@ -34,6 +34,10 @@ body{
   background-color: #3282cc;
 }
 
+.VALUE{
+  color: #ff9a28;
+}
+
 .SKEYWORD{
   color: darkorchid;
 }
@@ -50,14 +54,33 @@ body{
   color: #c7e4ff;
 }
 
-.VALUE{
-  color: #ff9a28;
-}
-
 .FUNCTION{
   color: #ffd000;
 }
 
 .CLASS{
   color: #00960c;
+}
+
+.COMMENT{
+  color: #006408;
+  font-style: italic;
+}
+
+.VALUE span{
+  color: #ff9a28;
+}
+
+.COMMENT span{
+  color: #006408;
+  font-style: italic;
+}
+
+span:hover{
+  text-decoration: underline;
+  text-decoration-color: green;
+}
+
+#displayEditor[ctrl]{
+  pointer-events: all;
 }
