@@ -9,6 +9,8 @@ d0["String to say"] (kjks lcs) "soundFile.mp3"
 
 d1["You know, I could keep giving serious examples, but that's not fun, right?"] (mei thisAnotherCharacter) "Sound/Dialogs/soundd3.wav"
   | Move mei 100 360 500
+  
+  sssssssssssssssssssssSSSsssssssssssssssssssssssssssssss              SSS
 
 
 d2["idk what else to make as example /shrug"] (lcs)
